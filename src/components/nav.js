@@ -71,7 +71,7 @@ class ButtonAppBar extends React.Component {
             </Typography>
             <Tabs value={value} onChange={this.handleChange} className={classes.tabs} centered>
               {this.renderTab('公告', '/publicities')}
-              {this.renderTab('公益时详情', '/volunteerTime')}
+              {this.renderTab('公益时详情', '/volunteer-time')}
               {this.renderTab('申请记录', '/applications')}
               {this.renderTab('申诉列表', '/appeals')}
             </Tabs>
