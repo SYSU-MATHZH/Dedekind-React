@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -8,8 +8,6 @@ import Button from 'material-ui/Button';
 import withRoot from '../withRoot';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Avatar from './avatar';
-import TabContainer from './TabContainer';
-import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
@@ -41,7 +39,7 @@ class ButtonAppBar extends React.Component {
   };
 
   renderTab(title, path, newTab=false) {
-    let currentLocation = this.props.location.pathname;
+    // let currentLocation = this.props.location.pathname;
     return (
         // <li className={currentLocation === path ? 'active': ''}>
         //     {!newTab ? <Link to={path}><FormattedMessage id={title} /></Link>: <a href={path} target="_blank" rel="noopener noreferrer"><FormattedMessage id={title} /></a>}
@@ -57,7 +55,6 @@ class ButtonAppBar extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
     const { value } = this.state;
     
     return (

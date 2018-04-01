@@ -1,6 +1,5 @@
 import React from 'react';
 import {withStyles} from 'material-ui/styles';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Input, {InputLabel} from 'material-ui/Input';
@@ -15,7 +14,6 @@ const styles = theme => ({
       margin: theme.spacing.unit,
       display: "block",
       width: 200,
-      margin: 'auto',
       padding: ['.3em', '1em', '.5em'],
   },
   main: {

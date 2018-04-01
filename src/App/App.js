@@ -32,7 +32,7 @@ class App extends Component {
                                 <Home onTimelineLoad={() => this.onTimelineLoad()} />
                             }/> */}
                             <Route path="/publicities" component={Index}/>
-                            <Route path="/users" component={Index}/>
+                            <Route path="/users" component={Home}/>
                             <Route path="/students" component={Index}/>
                             <Route path="/volunteerTime" component={Index}/>
                             <Route path="/activities" component={Index}/>
