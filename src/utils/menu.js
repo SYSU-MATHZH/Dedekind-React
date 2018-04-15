@@ -7,7 +7,7 @@ const menu = [
   {
     id: _.uniqueId(),
     key: 'dashboard',
-    name: '管理平台',
+    name: '公益时管理平台',
     icon: 'laptop',
     power: [1, 2],
   },

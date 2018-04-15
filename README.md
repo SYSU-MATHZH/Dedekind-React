@@ -2,6 +2,11 @@
 
 用于中珠数院公益时管理的React Web App，代号：Project Dedekind
 
+预设账号：
+- username: 'admin' password: 'admin'
+- username: 'teacher' password: '123456'
+- username: 'guest' password: 'guest'
+
 ## dev && build
 
 ### Getting Started
