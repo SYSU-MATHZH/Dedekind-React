@@ -1,16 +1,11 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { stringify } from 'qs'
-import Cookie from './cookie'
 
 // message 全局配置
 message.config({
   top: 50,
 })
-
-axios.defaults.baseURL = newband.app.admin.API_HOST
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-// axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('Authorization')
 
 const fetch = (url, options) => {
   const { method = 'get', data } = options
@@ -22,9 +17,9 @@ const fetch = (url, options) => {
     case 'head':
       return axios.head(url, data)
     case 'post':
-      return axios.post(url, stringify(data))
+      return axios.post(url, data)
     case 'put':
-      return axios.put(url, stringify(data))
+      return axios.put(url, data)
     case 'patch':
       return axios.patch(url, data)
     default:
@@ -45,29 +40,25 @@ function checkStatus (res) {
 function handelData (res) {
   const data = res.data
   if (data && data.msg && !data.success) {
-    message.error(data.msg)
+    message.warning(data.msg)
+  } else if (data && data.msg && data.success) {
+    message.success(data.msg)
   }
-  // else if(data && data.msg && data.success) {
-  //   message.success(data.msg)
-  // }
-  return { ...data.data, success: data.success || data.message === 'Success' }
+  return data
 }
 
 function handleError (error) {
-  const data = error.response.data
-  if (data.errors) {
-    message.error(`${data.message}：${data.errors}`, 5)
-  } else if (data.error) {
-    message.error(`${data.error}：${data.error_description}`, 5)
-  } else {
-    message.error('未知错误！', 5)
-  }
-  return { success: false }
+  message.error(error.response.data.errors, 5)
 }
 
 export default function request (url, options) {
-  if (url !== '/oauth/token' && url !== '/admin/check') {
-    url = `${url}?access_token=${Cookie.get('access_token')}`
+  if (options.cross) {
+    const params = {
+      q: `select * from json where url='${url}?${stringify(options.data)}'`,
+      format: 'json',
+    }
+    url = `http://query.yahooapis.com/v1/public/yql?${stringify(params)}`
+    options = 'get'
   }
 
   return fetch(url, options)

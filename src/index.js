@@ -1,16 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { HashRouter, Route } from 'react-router-dom';
+// import "babel-polyfill" // 如果需要支持ie 9+，请解注此行即可。
+import dva from 'dva'
+import { browserHistory } from 'dva/router'
+import createLoading from 'dva-loading'
 
-import { App } from './App/App';
-import { store } from './store/store';
+// 1. Initialize
+const app = dva({
+  history: browserHistory,
+  onError (error) {
+    console.error('app onError -- ', error)
+  },
+})
 
-ReactDOM.render(
-  <Provider store={store}>
-      <HashRouter>
-          <Route path="/" component={App} />
-      </HashRouter>
-  </Provider>,
-  document.getElementById('root')
-);
+// 2. Plugins
+app.use(createLoading({ effects: true }))
+
+// 3. Model
+app.model(require('./models/app'))
+app.model(require('./models/modal'))
+
+// 4. Router for browserHistory dynamic load
+app.router(require('./router'))
+
+// 5. Start
+app.start('#root')
