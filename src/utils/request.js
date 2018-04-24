@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { stringify } from 'qs'
-import Cookie from './cookie'
 
 // message 全局配置
 message.config({
@@ -66,9 +65,9 @@ function handleError (error) {
 }
 
 export default function request (url, options) {
-  if (url !== '/oauth/token' && url !== '/admin/check') {
-    url = `${url}?access_token=${Cookie.get('access_token')}`
-  }
+  // if (url !== '/oauth/token' && url !== '/admin/check') {
+  //   url = `${url}?access_token=${Cookie.get('access_token')}`
+  // }
 
   return fetch(url, options)
     .then(checkStatus)

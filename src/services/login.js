@@ -1,4 +1,7 @@
-import { request } from 'utils'
+import { request, config } from 'utils'
+
+const { api } = config
+const { loginUrl } = api
 
 export async function getToken () {
   const data = {
@@ -13,8 +16,9 @@ export async function getToken () {
 }
 
 export async function login (params) {
-  return request('/admin/check', {
+  return request(loginUrl, {
     method: 'post',
+    cross: true,
     data: params,
   })
 }

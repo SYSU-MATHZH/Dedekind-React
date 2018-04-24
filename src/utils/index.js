@@ -57,12 +57,11 @@ const isLogin = () => {
 
 const userName = Cookie.get('user_name')
 
-const setLoginIn = (name, accessToken, power, pathPowers) => {
+const setLoginIn = (name, power, pathPowers) => {
   const now = new Date()
   now.setDate(now.getDate() + 1)
   Cookie.set('user_session', now.getTime())
   Cookie.set('user_name', name)
-  Cookie.set('access_token', accessToken)
   Cookie.set('user_power', power)
   localStorage.setItem('allPathPowers', JSON.stringify(pathPowers))
   allPathPowers = pathPowers

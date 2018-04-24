@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router'
 import { setLoginIn, menu } from 'utils'
-import { getToken, login } from 'services/login'
+import { login } from 'services/login'
 
 function getAllPathPowers (menuArray, curPowers) {
   return menuArray.reduce((dir, item) => {
@@ -24,33 +24,68 @@ export default {
     * submit ({
       payload,
     }, { call, put, select }) {
-      const dataToken = yield call(getToken)
-      if (dataToken.success) {
-        const params = { access_token: dataToken.access_token, mobile: payload.username, username: payload.username, password: payload.password }
-        const data = yield call(login, params)
+      // const dataToken = yield call(getToken)
+      // if (dataToken.success) {
+      const params = { mobile: payload.username, username: payload.username, password: payload.password }
+      const data = yield call(login, params)
+      data.role_power = {
+        1: [1, 2],
 
-        const allPathPowers = getAllPathPowers(menu, data.role_power)
-        setLoginIn(payload.username, dataToken.access_token, data.role_power, allPathPowers)
+        // 用户管理
+        2: [1],
+        3: [1, 2, 3, 4, 5],
+        4: [1, 2, 3, 4, 5],
+        5: [1, 2, 3, 4, 5],
 
-        if (data && data.success) {
-          yield put({
-            type: 'app/loginSuccess',
-            payload: {
-              user: {
-                name: payload.username,
-              },
-              userPower: data.role_power,
-            },
-          })
+        // 系统管理
+        6: [1],
+        7: [1, 2, 4],
 
-          const nextLocation = yield select(state => state.routing.locationBeforeTransitions)
-          const nextPathname = nextLocation.state && nextLocation.state.nextPathname && nextLocation.state.nextPathname !== '/no-power' ? nextLocation.state.nextPathname : '/dashboard'
-          yield put(routerRedux.push({
-            pathname: nextPathname,
-            search: nextLocation.state && nextLocation.state.nextSearch,
-          }))
-        }
+        // 前端分页
+        8: [1],
+        9: [1, 2, 3, 4, 5],
+
+        // 测试导航
+        10: [1],
+        11: [1, 2],
+
+        12: [1],
+        13: [1, 2],
+        14: [1, 2],
+        // ui
+        15: [1],
+        16: [1, 2],
+        17: [1, 2],
+        18: [1, 2],
+        19: [1, 2],
+
+        // 公益时
+        20: [1],
+        21: [1, 2],
+        22: [1, 2],
       }
+      const allPathPowers = getAllPathPowers(menu, data.role_power)
+      setLoginIn(payload.username, data.role_power, allPathPowers)
+
+      if (data) {
+        yield put({
+          type: 'app/loginSuccess',
+          payload: {
+            user: {
+              name: payload.username,
+            },
+            userPower: data.role_power,
+          },
+        })
+
+        const nextLocation = yield select(state => state.routing.locationBeforeTransitions)
+        const nextPathname = nextLocation.state && nextLocation.state.nextPathname && nextLocation.state.nextPathname !== '/no-power' ? nextLocation.state.nextPathname : '/dashboard'
+        yield put(routerRedux.push({
+          pathname: nextPathname,
+          search: nextLocation.state && nextLocation.state.nextSearch,
+        }))
+      }
+      // }
     },
   },
   reducers: {

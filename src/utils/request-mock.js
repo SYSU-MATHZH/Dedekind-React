@@ -7,6 +7,14 @@ message.config({
   top: 50,
 })
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+// // 指定允许其他域名访问
+// axios.defaults.headers.("Access-Control-Allow-Origin:*");
+// // 响应类型
+// header("Access-Control-Allow-Methods:POST");
+// // 响应头设置
+// header("Access-Control-Allow-Headers:x-requested-with,content-type");
+
 const fetch = (url, options) => {
   const { method = 'get', data } = options
   switch (method.toLowerCase()) {
@@ -17,9 +25,9 @@ const fetch = (url, options) => {
     case 'head':
       return axios.head(url, data)
     case 'post':
-      return axios.post(url, data)
+      return axios.post(url, stringify(data))
     case 'put':
-      return axios.put(url, data)
+      return axios.put(url, stringify(data))
     case 'patch':
       return axios.patch(url, data)
     default:
@@ -52,14 +60,14 @@ function handleError (error) {
 }
 
 export default function request (url, options) {
-  if (options.cross) {
-    const params = {
-      q: `select * from json where url='${url}?${stringify(options.data)}'`,
-      format: 'json',
-    }
-    url = `http://query.yahooapis.com/v1/public/yql?${stringify(params)}`
-    options = 'get'
-  }
+  // if (options.cross) {
+  //   const params = {
+  //     q: `select * from json where url='${url}?${stringify(options.data)}'`,
+  //     format: 'json',
+  //   }
+  //   url = `http://query.yahooapis.com/v1/public/yql?${stringify(params)}`
+  //   options = 'get'
+  // }
 
   return fetch(url, options)
     .then(checkStatus)
