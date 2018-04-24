@@ -162,6 +162,30 @@ const Routers = function ({ history, app }) {
             // }
           ],
         },
+        // volunteer-time
+        {
+          path: 'volunteer-time',
+          name: 'volunteer-time',
+          childRoutes: [
+            {
+              path: 'passed',
+              name: 'passed',
+              getComponent (nextState, cb) {
+                require.ensure([], (require) => {
+                  cb(null, require('./routes/volunteer-time/passed'))
+                }, 'passed')
+              },
+            }, {
+              path: 'checking',
+              name: 'checking',
+              getComponent (nextState, cb) {
+                require.ensure([], (require) => {
+                  cb(null, require('./routes/volunteer-time/checking'))
+                }, 'checking')
+              },
+            },
+          ],
+        },
         // no-power
         {
           path: 'no-power',

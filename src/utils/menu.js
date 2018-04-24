@@ -146,6 +146,29 @@ const menu = [
       },
     ],
   },
+  // 公益时平台
+  {
+    id: _.uniqueId(),
+    key: 'volunteer-time',
+    name: '公益时',
+    icon: 'github',
+    clickable: false,
+    power: [1],
+    children: [
+      {
+        id: _.uniqueId(),
+        key: 'passed',
+        name: '公益时记录',
+        power: [1, 2],
+      },
+      {
+        id: _.uniqueId(),
+        key: 'checking',
+        name: '审核中',
+        power: [1, 2],
+      },
+    ],
+  },
 ]
 
 export default menu
