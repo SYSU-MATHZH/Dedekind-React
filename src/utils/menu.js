@@ -140,8 +140,8 @@ const menu = [
       },
       {
         id: _.uniqueId(),
-        key: 'lz-editor',
-        name: 'LzEditor',
+        key: 'editor',
+        name: 'Editor',
         power: [1, 2],
       },
     ],
@@ -157,15 +157,15 @@ const menu = [
     children: [
       {
         id: _.uniqueId(),
-        key: 'passed',
+        key: 'record',
         name: '公益时记录',
-        power: [1, 2],
+        power: [1, 2, 3, 4, 5],
       },
       {
         id: _.uniqueId(),
         key: 'checking',
         name: '审核中',
-        power: [1, 2],
+        power: [1, 2, 4, 5],
       },
     ],
   },

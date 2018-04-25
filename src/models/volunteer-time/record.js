@@ -7,7 +7,7 @@ const page = {
 }
 
 export default {
-  namespace: 'checking',
+  namespace: 'record',
   state: {
     isPostBack: true, // 判断是否是首次加载页面，作为前端分页判断标识符
     searchQuery: {},
@@ -21,7 +21,7 @@ export default {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        if (pathname === '/volunteer-time/checking') {
+        if (pathname === '/volunteer-time/record') {
           const curPowers = getCurPowers(pathname)
           if (curPowers) {
             dispatch({ type: 'app/changeCurPowers', payload: { curPowers } })
@@ -34,7 +34,7 @@ export default {
 
   effects: {
     * query ({ payload }, { select, call, put }) {
-      const { isPostBack, searchQuery } = yield select(({ checking }) => checking)
+      const { isPostBack, searchQuery } = yield select(({ record }) => record)
       const querys = renderQuery(searchQuery, payload)
 
       if (isPostBack) {
