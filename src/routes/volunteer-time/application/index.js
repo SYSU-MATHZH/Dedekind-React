@@ -1,15 +1,27 @@
 import React from 'react'
-import { Icon } from 'antd'
+import PropTypes from 'prop-types'
 import { connect } from 'dva'
-import styles from './index.less'
+import ApplicationModal from './ApplicationForm'
 
-const Application = () => (
-  <div className="content-inner">
-    <div className={styles.error}>
-      <Icon type="frown-o" />
-      <h1>对不起，此页面您无权进入！</h1>
-    </div>
-  </div>
-)
+const Application = ({ dispatch }) => {
+  const modalProps = {
+    onOk (data) {
+      dispatch({
+        type: 'application/create',
+        payload: {
+          curItem: data,
+        },
+      })
+    },
+  }
+
+  return (
+    <ApplicationModal {...modalProps} />
+  )
+}
+
+Application.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+}
 
 export default connect()(Application)

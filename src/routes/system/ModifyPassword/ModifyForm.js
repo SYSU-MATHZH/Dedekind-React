@@ -73,7 +73,7 @@ class ModifyForm extends Component {
     } = this.props
 
     return (
-      <Form className={styles.modifyForm} onSubmit={::this.handleSubmit}>
+      <Form className={styles.modifyForm} onSubmit={this.handleSubmit}>
         <FormItem label="旧密码：" hasFeedback {...formItemLayout}>
           {getFieldDecorator('oldPassword', {
             rules: [
@@ -91,10 +91,10 @@ class ModifyForm extends Component {
                 required: true,
                 message: '请输入新密码',
               }, {
-                validator: ::this.checkConfirm,
+                validator: this.checkConfirm,
               },
             ],
-          })(<Input placeholder="请输入新密码" type="password" onBlur={::this.handlePasswordBlur} />)}
+          })(<Input placeholder="请输入新密码" type="password" onBlur={this.handlePasswordBlur} />)}
         </FormItem>
         <FormItem label="新密码确认：" hasFeedback {...formItemLayout}>
           {getFieldDecorator('confirm', {
@@ -103,7 +103,7 @@ class ModifyForm extends Component {
                 required: true,
                 message: '请输入新密码确认',
               }, {
-                validator: ::this.checkPassword,
+                validator: this.checkPassword,
               },
             ],
           })(<Input placeholder="请输入新密码确认" type="password" />)}

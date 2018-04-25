@@ -63,6 +63,7 @@ export default {
         20: [1],
         21: [1, 2, 3, 4, 5],
         22: [1, 2, 3, 4, 5],
+        23: [1, 2, 3, 4, 5],
       }
       const allPathPowers = getAllPathPowers(menu, data.role_power)
       setLoginIn(payload.username, data.role_power, allPathPowers)

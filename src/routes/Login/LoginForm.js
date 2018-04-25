@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Form, Input } from 'antd'
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import QueueAnim from 'rc-queue-anim'
 import { config } from 'utils'
 import styles from './LoginForm.less'
@@ -43,7 +43,7 @@ const Login = ({
                   message: '请填写用户名',
                 },
               ],
-            })(<Input size="large" placeholder="用户名" />)}
+            })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" placeholder="用户名" />)}
           </FormItem>
           <FormItem hasFeedback key="2">
             {getFieldDecorator('password', {
@@ -53,12 +53,21 @@ const Login = ({
                   message: '请填写密码',
                 },
               ],
-            })(<Input size="large" type="password" placeholder="密码" />)}
+            })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" type="password" placeholder="密码" />)}
           </FormItem>
           <FormItem key="3">
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true,
+            })(
+              <Checkbox>15天内免登录</Checkbox>
+            )}
+            <a className="login-form-forgot" href="">忘记密码</a>
+            <p />
             <Button type="primary" htmlType="submit" size="large" loading={loading}>
               登录
             </Button>
+            或者 <a href="">现在注册！</a>
           </FormItem>
         </QueueAnim>
       </form>

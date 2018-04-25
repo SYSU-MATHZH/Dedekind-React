@@ -157,6 +157,14 @@ const menu = [
     children: [
       {
         id: _.uniqueId(),
+        key: 'application',
+        name: '公益时申请',
+        clickable: false,
+        icon: 'plus-circle-o',
+        power: [2, 3],
+      },
+      {
+        id: _.uniqueId(),
         key: 'record',
         name: '公益时记录',
         power: [1, 2, 3, 4, 5],

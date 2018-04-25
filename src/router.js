@@ -168,6 +168,16 @@ const Routers = function ({ history, app }) {
           name: 'volunteer-time',
           childRoutes: [
             {
+              path: 'application',
+              name: 'application',
+              getComponent (nextState, cb) {
+                require.ensure([], (require) => {
+                  registerModel(app, require('./models/volunteer-time/application'))
+                  cb(null, require('./routes/volunteer-time/application'))
+                }, 'application')
+              },
+            },
+            {
               path: 'record',
               name: 'record',
               getComponent (nextState, cb) {
@@ -184,15 +194,6 @@ const Routers = function ({ history, app }) {
                   registerModel(app, require('./models/volunteer-time/checking'))
                   cb(null, require('./routes/volunteer-time/checking'))
                 }, 'checking')
-              },
-            }, {
-              path: 'application',
-              name: 'application',
-              getComponent (nextState, cb) {
-                require.ensure([], (require) => {
-                  registerModel(app, require('./models/volunteer-time/application'))
-                  cb(null, require('./routes/volunteer-time/application'))
-                }, 'application')
               },
             },
           ],

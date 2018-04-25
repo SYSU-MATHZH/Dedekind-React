@@ -9,7 +9,6 @@ const Search = ({
   keyword,
   addPower,
   onSearch,
-  onAdd,
 }) => {
   const searchGroupProps = {
     field,
@@ -24,7 +23,7 @@ const Search = ({
       onSearch(value)
     },
   }
-  
+
   return (
     <Row gutter={24}>
       <Col lg={8} md={12} sm={16} xs={24} style={{ marginBottom: 16 }}>
@@ -32,8 +31,8 @@ const Search = ({
       </Col>
       {addPower &&
         <Col lg={{ offset: 8, span: 8 }} md={12} sm={8} xs={24} style={{ marginBottom: 16, textAlign: 'right' }}>
-          <Link to="/volunteer-time/application/">
-            <Button size="large" type="ghost" onClick={onAdd}>
+          <Link to="/volunteer-time/application">
+            <Button size="large" type="ghost">
               <Icon type="plus-circle-o" />申请公益时
             </Button>
           </Link>
@@ -45,7 +44,6 @@ const Search = ({
 Search.propTypes = {
   form: PropTypes.object.isRequired,
   onSearch: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
   field: PropTypes.string,
   keyword: PropTypes.string,
   addPower: PropTypes.bool.isRequired,

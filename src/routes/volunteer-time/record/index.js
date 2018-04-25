@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { checkPower } from 'utils'
 import { ADD, UPDATE, DELETE } from 'constants/options'
-import CategoryList from './List'
-import CategorySearch from './Search'
-import CategoryModal from './ModalForm'
+import RecordList from './List'
+import RecordSearch from './Search'
+import RecordModal from './ModalForm'
 
 function Record ({ location, curPowers, dispatch, record, modal, loading }) {
   const addPower = checkPower(ADD, curPowers)
@@ -27,14 +27,14 @@ function Record ({ location, curPowers, dispatch, record, modal, loading }) {
         },
       })
     },
-    onAdd () {
-      dispatch({
-        type: 'modal/showModal',
-        payload: {
-          type: 'create',
-        },
-      })
-    },
+    // onAdd () {
+    //   dispatch({
+    //     type: 'modal/showModal',
+    //     payload: {
+    //       type: 'create',
+    //     },
+    //   })
+    // },
   }
 
   const listProps = {
@@ -82,9 +82,9 @@ function Record ({ location, curPowers, dispatch, record, modal, loading }) {
 
   return (
     <div className="content-inner">
-      <CategorySearch {...searchProps} />
-      <CategoryList {...listProps} />
-      <CategoryModal {...modalProps} />
+      <RecordSearch {...searchProps} />
+      <RecordList {...listProps} />
+      <RecordModal {...modalProps} />
     </div>
   )
 }
