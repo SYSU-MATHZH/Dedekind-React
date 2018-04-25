@@ -8,12 +8,6 @@ message.config({
 })
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-// // 指定允许其他域名访问
-// axios.defaults.headers.("Access-Control-Allow-Origin:*");
-// // 响应类型
-// header("Access-Control-Allow-Methods:POST");
-// // 响应头设置
-// header("Access-Control-Allow-Headers:x-requested-with,content-type");
 
 const fetch = (url, options) => {
   const { method = 'get', data } = options

@@ -172,6 +172,7 @@ const Routers = function ({ history, app }) {
               name: 'passed',
               getComponent (nextState, cb) {
                 require.ensure([], (require) => {
+                  registerModel(app, require('./models/volunteer-time/passed'))
                   cb(null, require('./routes/volunteer-time/passed'))
                 }, 'passed')
               },
@@ -180,6 +181,7 @@ const Routers = function ({ history, app }) {
               name: 'checking',
               getComponent (nextState, cb) {
                 require.ensure([], (require) => {
+                  registerModel(app, require('./models/volunteer-time/checking'))
                   cb(null, require('./routes/volunteer-time/checking'))
                 }, 'checking')
               },
