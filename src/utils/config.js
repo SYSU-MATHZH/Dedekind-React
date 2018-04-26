@@ -13,6 +13,8 @@ export default {
   api: {
     loginUrl: `${API}/login/`,
     vTimeUrl: `${API}/suas/`, // vTime == volunteer-time
+    applicationUrl: `${API}/applications/`,
+    applicationApplyUrl: `${API}/applications/apply/`,
     userLoginUrl: `${API}/user/login`,
     userLogoutUrl: `${API}/user/logout`,
     userInfoUrl: `${API}/userInfo`,

@@ -1,4 +1,4 @@
-import { create } from 'services/volunteer-time/volunteer-time'
+import { create } from 'services/volunteer-time/application'
 
 export default {
   namespace: 'application',

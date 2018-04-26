@@ -29,15 +29,32 @@ const ApplicationForm = ({
   },
   onOk,
 }) => {
-  function handleOk () {
+  function handleOk (e) {
+    e.preventDefault()
     validateFields((errors, values) => {
       if (errors) {
         return
       }
       const data = {
-        ...values,
+        application: {
+          contact: values.contact,
+          proof: 'http://example.com',
+        },
+        activity: {
+          title: values.title,
+          date: values.date.format('YYYY-MM-DD HH:mm:ss'),
+          detail: values.detail,
+          group: values.group,
+          team: values.team,
+          is_valid: values.is_valid ? values.is_valid : false,
+        },
+        student: 'http://example.com',
+        suahours: values.suahours ? values.suahours : 1,
+        is_valid: values.is_valid ? values.is_valid : false,
       }
+      console.log('Received values of form: ', data)
       onOk(data)
+      onOk({ ...values, date: values.date.format('YYYY-MM-DD HH:mm:ss') })
     })
   }
 
@@ -82,7 +99,7 @@ const ApplicationForm = ({
       <Row >
         <Col xs={2} /><Col xs={10}>
           <FormItem label="活动名称" >
-            {getFieldDecorator('name', {
+            {getFieldDecorator('title', {
               rules: [
                 {
                   required: true,
@@ -94,13 +111,7 @@ const ApplicationForm = ({
         </Col>
         <Col xs={2} /><Col xs={10}>
           <FormItem label="活动详情" >
-            {getFieldDecorator('group', {
-              rules: [
-                {
-                  required: false,
-                },
-              ],
-            })(<Input />)}
+            {getFieldDecorator('detail', { rules: [{ required: false }] })(<Input />)}
           </FormItem>
         </Col>
       </Row>
@@ -119,7 +130,7 @@ const ApplicationForm = ({
         </Col>
         <Col xs={2} /><Col xs={10}>
           <FormItem label="参与组别" >
-            {getFieldDecorator('group', {
+            {getFieldDecorator('team', {
               rules: [
                 {
                   required: false,
@@ -140,7 +151,7 @@ const ApplicationForm = ({
             </span>
           )}
           >
-            {getFieldDecorator('group', {
+            {getFieldDecorator('contact', {
               rules: [
                 {
                   required: true,
@@ -152,7 +163,7 @@ const ApplicationForm = ({
         </Col>
         <Col xs={2} /><Col xs={10}>
           <FormItem label="活动时间">
-            {getFieldDecorator('time', {
+            {getFieldDecorator('date', {
               rules: [
                 {
                   type: 'object',
@@ -173,19 +184,24 @@ const ApplicationForm = ({
       <Row >
         <Col xs={24}>
           <FormItem label="公益时数" {...formItemLayout}>
-            <InputNumber
-              defaultValue={1}
-              min={1}
-              max={100}
-              formatter={value => `${value}小时`}
-              parser={value => value.replace('小时', '')}
-              onChange={onChange}
-            />
+
+            {getFieldDecorator('suahours', { rules: [{ required: false }], initialValue: 1 })(
+              <InputNumber
+                min={1}
+                max={100}
+                formatter={value => `${value}小时`}
+                parser={value => value.replace('小时', '')}
+                onChange={onChange}
+              />
+            )}
           </FormItem>
         </Col>
       </Row>
       <FormItem label="是否为线下证明" {...formItemLayout}>
-        <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked /></FormItem>
+        {getFieldDecorator('is_valid', { rules: [{ required: false }], initialValue: true })(
+          <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked />
+        )}
+      </FormItem>
       <FormItem label="提交相关证明" {...formItemLayout}>
         <div className="dropbox">
           {getFieldDecorator('dragger', {

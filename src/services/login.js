@@ -18,7 +18,6 @@ export async function getToken () {
 export async function login (params) {
   return request(loginUrl, {
     method: 'post',
-    cross: true,
     data: params,
   })
 }

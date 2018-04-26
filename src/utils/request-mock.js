@@ -8,6 +8,10 @@ message.config({
 })
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+axios.defaults.withCredentials = true
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*"
 
 const fetch = (url, options) => {
   const { method = 'get', data } = options
